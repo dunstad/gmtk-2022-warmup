@@ -9,16 +9,17 @@ public class SceneLoader : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
-            StartCoroutine(LoadNextScene());
+        // if (Input.GetMouseButtonDown(0))
+        //     StartCoroutine(LoadNextScene());
     }
 
-    IEnumerator LoadNextScene()
+    public IEnumerator LoadNextScene()
     {
         crossFade.SetTrigger("Start");
         yield return new WaitForSeconds(1f);
         Scene scene = SceneManager.GetActiveScene();
         int nextLevelBuildIndex = 1 - scene.buildIndex;
         SceneManager.LoadScene(nextLevelBuildIndex);
+        SceneManager.LoadScene("SharedStuff", LoadSceneMode.Additive);
     }
 }

@@ -5341,7 +5341,6 @@ GameObject:
   m_Component:
   - component: {fileID: 126553037}
   - component: {fileID: 126553036}
-  - component: {fileID: 126553035}
   m_Layer: 0
   m_Name: pearl
   m_TagString: Untagged
@@ -5349,22 +5348,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!111 &126553035
-Animation:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 126553034}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Animation: {fileID: 0}
-  m_Animations:
-  - {fileID: 7400000, guid: 517155fe5b3ae3941b853204942eea16, type: 2}
-  m_WrapMode: 0
-  m_PlayAutomatically: 0
-  m_AnimatePhysics: 0
-  m_CullingType: 0
 --- !u!212 &126553036
 SpriteRenderer:
   m_ObjectHideFlags: 0

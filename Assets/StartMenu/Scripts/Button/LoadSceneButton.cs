@@ -10,9 +10,17 @@ namespace ModularOptions {
 	public class LoadSceneButton : MonoBehaviour {
 
 		[SceneRef] public string scene;
+		SceneLoader sceneLoader;
+
+		void Start() {
+			sceneLoader = (SceneLoader) GameObject.Find("SceneLoader").GetComponent(typeof(SceneLoader));
+		}
 
 		void Awake(){
-			GetComponent<Button>().onClick.AddListener(() => UnityEngine.SceneManagement.SceneManager.LoadScene(scene));
+			GetComponent<Button>().onClick.AddListener(() => {
+				// UnityEngine.SceneManagement.SceneManager.LoadScene(scene);
+				StartCoroutine(sceneLoader.LoadNextScene());
+			});
 		}
 	}
 }
