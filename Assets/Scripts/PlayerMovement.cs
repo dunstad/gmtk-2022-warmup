@@ -11,6 +11,7 @@ public class PlayerMovement : MonoBehaviour {
 	float horizontalMove = 0f;
 	bool jump = false;
 	bool crouch = false;
+	private bool grab = false;
 	
 	// Update is called once per frame
 	void Update () {
@@ -20,6 +21,11 @@ public class PlayerMovement : MonoBehaviour {
 		if (Input.GetButtonDown("Jump"))
 		{
 			jump = true;
+		}
+		
+		if (Input.GetButtonDown("Grab"))
+		{
+			grab = true;
 		}
 
 		// if (Input.GetButtonDown("Crouch"))
@@ -37,5 +43,12 @@ public class PlayerMovement : MonoBehaviour {
 		// Move our character
 		controller.Move(horizontalMove * Time.fixedDeltaTime, crouch, jump);
 		jump = false;
+
+		// grab things
+		if (grab)
+		{
+			controller.Grab();
+			grab = false;
+		}
 	}
 }

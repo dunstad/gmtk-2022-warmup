@@ -30,6 +30,10 @@ public class CharacterController2D : MonoBehaviour
 	public BoolEvent OnCrouchEvent;
 	private bool m_wasCrouching = false;
 
+	public Collider2D grabCollider;
+	public Transform grabPoint;
+	private GameObject held = null;
+
 	private void Awake()
 	{
 		m_Rigidbody2D = GetComponent<Rigidbody2D>();
@@ -130,6 +134,28 @@ public class CharacterController2D : MonoBehaviour
 			m_Grounded = false;
 			m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce));
 		}
+	}
+
+	public void Grab()
+	{
+		Debug.Log("grab!");
+		Collider2D[] results = new Collider2D[1];
+		ContactFilter2D contactFilter = new ContactFilter2D();
+		contactFilter.useTriggers = false;
+		grabCollider.OverlapCollider(contactFilter, results);
+		Holdable holdable = (Holdable) results[0].GetComponent(typeof(Holdable));
+		if (holdable != null)
+		{
+			holdable.OnGrab(grabPoint);
+			held = results[0].transform.root.gameObject;
+		}
+	}
+
+	public void Drop()
+	{
+		Holdable holdable = (Holdable) held.GetComponent(typeof(Holdable));
+		holdable.OnDrop(grabPoint);
+		held = null;
 	}
 
 
