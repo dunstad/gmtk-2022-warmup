@@ -32,7 +32,7 @@ public class CharacterController2D : MonoBehaviour
 
 	public Collider2D grabCollider;
 	public Transform grabPoint;
-	private GameObject held = null;
+	private Holdable held = null;
 
 	private void Awake()
 	{
@@ -136,7 +136,18 @@ public class CharacterController2D : MonoBehaviour
 		}
 	}
 
-	public void Grab()
+	public void GrabOrDrop()
+	{
+		if (held == null)
+		{
+			Grab();
+		} else
+		{
+ 			Drop();
+		}
+	}
+
+	private void Grab()
 	{
 		Debug.Log("grab!");
 		Collider2D[] results = new Collider2D[1];
@@ -147,14 +158,14 @@ public class CharacterController2D : MonoBehaviour
 		if (holdable != null)
 		{
 			holdable.OnGrab(grabPoint);
-			held = results[0].transform.root.gameObject;
+			held = holdable;
 		}
 	}
 
-	public void Drop()
+	private void Drop()
 	{
-		Holdable holdable = (Holdable) held.GetComponent(typeof(Holdable));
-		holdable.OnDrop(grabPoint);
+		Debug.Log(held);
+		held.OnDrop(grabPoint);
 		held = null;
 	}
 

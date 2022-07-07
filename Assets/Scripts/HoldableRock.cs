@@ -22,6 +22,7 @@ public class HoldableRock : MonoBehaviour, Holdable
     void Holdable.OnDrop(Transform grabPoint)
     {
         body.simulated = true;
+        gameObject.transform.localScale = new Vector3(1f, 1f, 1f);
         gameObject.transform.SetParent(null);
     }
 

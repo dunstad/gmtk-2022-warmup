@@ -47,7 +47,7 @@ public class PlayerMovement : MonoBehaviour {
 		// grab things
 		if (grab)
 		{
-			controller.Grab();
+			controller.GrabOrDrop();
 			grab = false;
 		}
 	}
