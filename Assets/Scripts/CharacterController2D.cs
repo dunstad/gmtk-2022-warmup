@@ -150,12 +150,19 @@ public class CharacterController2D : MonoBehaviour
 	private void Grab()
 	{
 		Debug.Log("grab!");
-		// TODO: make this long, look through colliders for a Holdable
-		Collider2D[] results = new Collider2D[1];
+		Collider2D[] results = new Collider2D[100];
 		ContactFilter2D contactFilter = new ContactFilter2D();
 		contactFilter.useTriggers = false;
 		grabCollider.OverlapCollider(contactFilter, results);
-		Holdable holdable = (Holdable) results[0].GetComponent(typeof(Holdable));
+		Holdable holdable = null;
+		foreach (Collider2D result in results)
+		{
+			if (result)
+			{
+				holdable = (Holdable) result.GetComponent(typeof(Holdable));
+				break;
+			}
+		}
 		if (holdable != null)
 		{
 			holdable.OnGrab(grabPoint);
