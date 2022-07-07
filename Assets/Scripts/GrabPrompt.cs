@@ -5,11 +5,12 @@ using UnityEngine;
 public class GrabPrompt : MonoBehaviour
 {
     public GameObject prompt;
+    private Animator anim;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        anim = prompt.GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -18,11 +19,13 @@ public class GrabPrompt : MonoBehaviour
         
     }
 
+    // TODO: track which kinds of Holdable we've shown the prompt for
+    // only show for each type once
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.GetComponent(typeof(Holdable)))
         {
-            prompt.SetActive(true);
+            anim.Play("prompt_in");
         }
     }
 
@@ -30,7 +33,7 @@ public class GrabPrompt : MonoBehaviour
     {
         if (other.GetComponent(typeof(Holdable)))
         {
-            prompt.SetActive(false);
+            anim.Play("prompt_out");
         }
     }
 

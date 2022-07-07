@@ -150,6 +150,7 @@ public class CharacterController2D : MonoBehaviour
 	private void Grab()
 	{
 		Debug.Log("grab!");
+		// TODO: make this long, look through colliders for a Holdable
 		Collider2D[] results = new Collider2D[1];
 		ContactFilter2D contactFilter = new ContactFilter2D();
 		contactFilter.useTriggers = false;
