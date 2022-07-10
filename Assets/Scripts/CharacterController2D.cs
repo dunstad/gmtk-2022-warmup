@@ -150,7 +150,7 @@ public class CharacterController2D : MonoBehaviour
 	private void Grab()
 	{
 		Debug.Log("grab!");
-		Collider2D[] results = new Collider2D[100];
+		Collider2D[] results = new Collider2D[10];
 		ContactFilter2D contactFilter = new ContactFilter2D();
 		contactFilter.useTriggers = false;
 		grabCollider.OverlapCollider(contactFilter, results);
@@ -159,8 +159,11 @@ public class CharacterController2D : MonoBehaviour
 		{
 			if (result)
 			{
-				holdable = (Holdable) result.GetComponent(typeof(Holdable));
-				break;
+				Debug.Log(result);
+				if (holdable == null)
+				{
+					holdable = (Holdable) result.GetComponent(typeof(Holdable));
+				}
 			}
 		}
 		if (holdable != null)
@@ -187,5 +190,8 @@ public class CharacterController2D : MonoBehaviour
 		Vector3 theScale = transform.localScale;
 		theScale.x *= -1;
 		transform.localScale = theScale;
+		// TODO: grab point flipping weirdly
+		// theScale.x *= -1;
+		// transform.Find("prompt").localScale = theScale;
 	}
 }
