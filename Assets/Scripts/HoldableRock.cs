@@ -6,24 +6,26 @@ public class HoldableRock : MonoBehaviour, Holdable
 {
 
     Rigidbody2D body;
+    Vector3 startingScale;
 
     private void Start() {
         body = (Rigidbody2D) gameObject.GetComponent(typeof(Rigidbody2D));
+        startingScale = gameObject.transform.localScale;
     }
 
     void Holdable.OnGrab(Transform grabPoint)
     {
         body.simulated = false;
-        gameObject.transform.SetParent(grabPoint);
         gameObject.transform.position = grabPoint.position;
-        gameObject.transform.localScale = new Vector3(.5f, .5f, 1f);
+        gameObject.transform.localScale = Vector3.Scale(startingScale, new Vector3(.5f, .5f, .5f));
+        gameObject.transform.SetParent(grabPoint);
     }
 
     void Holdable.OnDrop(Transform grabPoint)
     {
         body.simulated = true;
-        gameObject.transform.localScale = new Vector3(1f, 1f, 1f);
         gameObject.transform.SetParent(null);
+        gameObject.transform.localScale = startingScale;
     }
 
 }

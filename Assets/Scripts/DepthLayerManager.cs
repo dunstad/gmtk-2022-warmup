@@ -26,7 +26,7 @@ public class DepthLayerManager : MonoBehaviour
         int defaultLayerValue = SortingLayer.GetLayerValueFromName("Default");
         foreach (SpriteRenderer sprite in sprites) {
             float z = sprite.gameObject.transform.position.z;
-            sprite.sortingOrder = (int) Math.Round(z, 0);
+            sprite.sortingOrder = (int) Math.Round(z * -100, 0);
         }
     }
 }
